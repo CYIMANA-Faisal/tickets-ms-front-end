@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ant-design/cssinjs':
+    specifier: ^1.21.0
+    version: 1.21.0(react-dom@18.3.1)(react@18.3.1)
+  '@ant-design/icons':
+    specifier: ^5.3.7
+    version: 5.3.7(react-dom@18.3.1)(react@18.3.1)
   '@ant-design/nextjs-registry':
     specifier: ^1.0.0
-    version: 1.0.0(@ant-design/cssinjs@1.20.0)(antd@5.18.1)(next@14.2.4)(react-dom@18.3.1)(react@18.3.1)
+    version: 1.0.0(@ant-design/cssinjs@1.21.0)(antd@5.18.1)(next@14.2.4)(react-dom@18.3.1)(react@18.3.1)
   antd:
     specifier: ^5.18.1
     version: 5.18.1(react-dom@18.3.1)(react@18.3.1)
@@ -60,8 +66,8 @@ packages:
       '@ctrl/tinycolor': 3.6.1
     dev: false
 
-  /@ant-design/cssinjs@1.20.0(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-uG3iWzJxgNkADdZmc6W0Ci3iQAUOvLMcM8SnnmWq3r6JeocACft4ChnY/YWvI2Y+rG/68QBla/O+udke1yH3vg==}
+  /@ant-design/cssinjs@1.21.0(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-gIilraPl+9EoKdYxnupxjHB/Q6IHNRjEXszKbDxZdsgv4sAZ9pjkCq8yanDWNvyfjp4leir2OVAJm0vxwKK8YA==}
     peerDependencies:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
@@ -97,7 +103,7 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
-  /@ant-design/nextjs-registry@1.0.0(@ant-design/cssinjs@1.20.0)(antd@5.18.1)(next@14.2.4)(react-dom@18.3.1)(react@18.3.1):
+  /@ant-design/nextjs-registry@1.0.0(@ant-design/cssinjs@1.21.0)(antd@5.18.1)(next@14.2.4)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-kU1K1UOhwrF6DPv73MhuL5a6U4e6/TiFapeLUt/c/kch9h5qFwEaJPb4RSJKNw0PRBfqCAPS011wVm4wYcrqbQ==}
     peerDependencies:
       '@ant-design/cssinjs': ^1.18.2
@@ -106,7 +112,7 @@ packages:
       react: '>=16.0.0'
       react-dom: '>=16.0.0'
     dependencies:
-      '@ant-design/cssinjs': 1.20.0(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/cssinjs': 1.21.0(react-dom@18.3.1)(react@18.3.1)
       antd: 5.18.1(react-dom@18.3.1)(react@18.3.1)
       next: 14.2.4(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
@@ -628,7 +634,7 @@ packages:
       react-dom: '>=16.9.0'
     dependencies:
       '@ant-design/colors': 7.0.2
-      '@ant-design/cssinjs': 1.20.0(react-dom@18.3.1)(react@18.3.1)
+      '@ant-design/cssinjs': 1.21.0(react-dom@18.3.1)(react@18.3.1)
       '@ant-design/icons': 5.3.7(react-dom@18.3.1)(react@18.3.1)
       '@ant-design/react-slick': 1.1.2(react@18.3.1)
       '@babel/runtime': 7.24.7
