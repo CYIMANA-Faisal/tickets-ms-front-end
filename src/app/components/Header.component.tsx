@@ -23,7 +23,13 @@ const HeaderComponent: React.FunctionComponent<IHeaderComponentProps> = ({
     <Header className="!p-0 !bg-white flex justify-between items-center">
       <Button
         type="text"
-        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        icon={
+          collapsed ? (
+            <MenuUnfoldOutlined className="hover:!rounded-none" />
+          ) : (
+            <MenuFoldOutlined className="hover:!rounded-none" />
+          )
+        }
         onClick={() => setCollapsed(!collapsed)}
         className="!h-16 !text-base !w-16 text-neutral-900"
       />

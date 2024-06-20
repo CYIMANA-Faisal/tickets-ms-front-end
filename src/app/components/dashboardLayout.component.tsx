@@ -5,6 +5,7 @@ import { Layout } from "antd";
 import BreadcrumbComponent from "./breadcrumb.component";
 import HeaderComponent from "./Header.component";
 import SideNav from "./sideNav.component";
+import Title from "antd/es/typography/Title";
 
 const { Content } = Layout;
 
@@ -20,7 +21,8 @@ export default function DashboardLayout({
         <SideNav collapsed={collapsed} />
         <Layout>
           <HeaderComponent collapsed={collapsed} setCollapsed={setCollapsed} />
-          <Content className="m-4 p-6">
+          <Content className="m-4">
+            <Title level={5}>Dashboard</Title>
             <BreadcrumbComponent />
             {children}
           </Content>
