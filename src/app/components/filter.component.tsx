@@ -18,7 +18,7 @@ const FilterButtonGroup: React.FunctionComponent<IFilterButtonGroupProps> = (
         onClick={() => handleSelect("all")}
         className={`rounded-full px-4 py-2 border ${
           selected === "all"
-            ? "bg-blue-500 text-white border-blue-500"
+            ? "bg-primary text-white border-primary"
             : "bg-gray-100 text-black border-gray-300 hover:bg-blue-100 hover:border-blue-200"
         }`}
       >
@@ -28,7 +28,7 @@ const FilterButtonGroup: React.FunctionComponent<IFilterButtonGroupProps> = (
         onClick={() => handleSelect("normal")}
         className={`rounded-full px-4 py-2 border ${
           selected === "normal"
-            ? "bg-blue-500 text-white border-blue-500"
+            ? "bg-primary text-white border-primary"
             : "bg-gray-100 text-black border-gray-300 hover:bg-blue-100 hover:border-blue-200"
         }`}
       >
@@ -38,7 +38,7 @@ const FilterButtonGroup: React.FunctionComponent<IFilterButtonGroupProps> = (
         onClick={() => handleSelect("critical")}
         className={`rounded-full px-4 py-2 border ${
           selected === "critical"
-            ? "bg-blue-500 text-white border-blue-500"
+            ? "bg-primary text-white border-primary"
             : "bg-gray-100 text-black border-gray-300 hover:bg-blue-100 hover:border-blue-200"
         }`}
       >

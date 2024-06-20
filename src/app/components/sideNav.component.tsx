@@ -33,27 +33,27 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
     {
       key: "1",
       label: "Overview",
-      icon: <BarChartOutlined className="!text-primary !font-bold !text-lg" />,
+      icon: <BarChartOutlined className="!text-white !font-bold !text-lg" />,
       href: "/",
     },
     {
       key: "2",
       label: "Tickets",
       icon: (
-        <UnorderedListOutlined className="!text-primary !font-bold !text-lg" />
+        <UnorderedListOutlined className="!text-white !font-bold !text-lg" />
       ),
       href: "/tickets",
     },
     {
       key: "3",
       label: "Chats",
-      icon: <MessageOutlined className="!text-primary !font-bold !text-lg" />,
+      icon: <MessageOutlined className="!text-white !font-bold !text-lg" />,
       href: "/chats",
     },
     {
       key: "4",
       label: "Settings",
-      icon: <SettingOutlined className="!text-primary !font-bold !text-lg" />,
+      icon: <SettingOutlined className="!text-white !font-bold !text-lg" />,
       href: "/settings",
     },
   ];
@@ -62,9 +62,9 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
     <Menu.Item
       key={item.key}
       icon={item.icon}
-      className={`!text-primary !text-md hover:!text-primary-hover !mb-3 ${
+      className={`!text-white !text-md hover:!text-primary-hover !mb-3 ${
         selectedKey === item.key
-          ? "!bg-white border-l-4 border-primary !rounded-none"
+          ? "!bg-primary border-l-4 border-white !rounded-none"
           : ""
       }`}
     >
@@ -74,7 +74,7 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
 
   return (
     <Sider
-      className="!bg-white"
+      className="!bg-primary"
       trigger={null}
       collapsible
       collapsed={collapsed}
@@ -86,7 +86,7 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
         theme="dark"
         mode="inline"
         selectedKeys={[selectedKey]}
-        className="!bg-white !mt-4"
+        className="!bg-primary !mt-4"
         onClick={({ key }) => handleMenuClick(key)}
       >
         {items.map(renderMenuItem)}
