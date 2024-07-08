@@ -20,7 +20,10 @@ const HeaderComponent: React.FunctionComponent<IHeaderComponentProps> = ({
   setCollapsed,
 }) => {
   return (
-    <Header className="!p-0 !bg-white flex justify-between items-center">
+    <Header
+      className="!p-0 !bg-white flex justify-between items-center"
+      style={{ position: "sticky" }}
+    >
       <Button
         type="text"
         icon={

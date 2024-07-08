@@ -156,7 +156,7 @@ export default async function Page() {
                     <Cell
                       key={`cell-${index}`}
                       fill={
-                        ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"][index % 4]
+                        ["#f59e0b", "#84cc16", "#f87171", "#38bdf8"][index % 4]
                       }
                     />
                   ))}
@@ -181,7 +181,7 @@ export default async function Page() {
                   type="monotone"
                   dataKey="tickets"
                   stroke="#8884d8"
-                  fill="#8884d8"
+                  fill="#334155"
                 />
               </AreaChart>
             </ResponsiveContainer>

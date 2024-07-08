@@ -12,23 +12,25 @@ const BreadcrumbComponent: React.FunctionComponent<IBreadcrumbProps> = (
   const pathSnippets = pathname.split("/").filter((i) => i);
 
   const breadcrumbItems = [
-    <Breadcrumb.Item key="home">
-      <Link href="/">Home</Link>
-    </Breadcrumb.Item>,
+    {
+      key: "home",
+      title: <Link href="/">Home</Link>,
+    },
     ...pathSnippets.map((_, index) => {
       const url = `/${pathSnippets.slice(0, index + 1).join("/")}`;
       const label = pathSnippets[index];
-      return (
-        <Breadcrumb.Item key={url}>
+      return {
+        key: url,
+        title: (
           <Link href={url}>
             {label.charAt(0).toUpperCase() + label.slice(1)}
           </Link>
-        </Breadcrumb.Item>
-      );
+        ),
+      };
     }),
   ];
 
-  return <Breadcrumb>{breadcrumbItems}</Breadcrumb>;
+  return <Breadcrumb items={breadcrumbItems} />;
 };
 
 export default BreadcrumbComponent;

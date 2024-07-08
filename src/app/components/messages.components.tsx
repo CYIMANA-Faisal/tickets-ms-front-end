@@ -5,6 +5,7 @@ import {
   EyeInvisibleOutlined,
   PaperClipOutlined,
 } from "@ant-design/icons";
+import { Document, Page } from "@react-pdf/renderer";
 
 interface Message {
   id: number;
@@ -29,6 +30,30 @@ const Messages: React.FunctionComponent<MessagesProps> = ({
 }) => {
   const handleToggleVisibility = (messageId: number) => {
     onToggleVisibility(messageId);
+  };
+
+  const renderAttachmentPreview = (attachment: {
+    name: string;
+    url: string;
+  }) => {
+    const fileExtension = attachment.name.split(".").pop()?.toLowerCase();
+    console.log(fileExtension);
+    if (fileExtension === "pdf") {
+      return (
+        <Document file={attachment.url}>
+          <Page pageNumber={1} width={200} />
+        </Document>
+      );
+    } else if (["jpg", "jpeg", "png", "gif"].includes(fileExtension || "")) {
+      return (
+        <img
+          src={attachment.url}
+          alt={attachment.name}
+          className="w-full mb-2"
+        />
+      );
+    }
+    return null;
   };
 
   return (
@@ -62,22 +87,24 @@ const Messages: React.FunctionComponent<MessagesProps> = ({
                 : "bg-white text-left border border-slate-200"
             }`}
           >
-            <div className="mb-2 text-md">{message.content}</div>
-            {message.attachments && (
-              <div className="mt-2">
-                {message.attachments.map((file, index) => (
-                  <a
-                    key={index}
-                    href={file.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-primary underline mb-1"
-                  >
-                    <PaperClipOutlined /> {file.name}
-                  </a>
+            {message.attachments && message.attachments.length > 0 && (
+              <div className="mb-2">
+                {message.attachments.map((attachment, index) => (
+                  <div key={index}>
+                    {renderAttachmentPreview(attachment)}
+                    <a
+                      href={attachment.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-primary underline mb-1"
+                    >
+                      <PaperClipOutlined /> {attachment.name}
+                    </a>
+                  </div>
                 ))}
               </div>
             )}
+            <div className="mb-2 text-md">{message.content}</div>
             <div className="mt-4 text-sm">{message.timestamp}</div>
           </div>
         </div>

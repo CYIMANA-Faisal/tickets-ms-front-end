@@ -21,7 +21,7 @@ export default function DashboardLayout({
         <SideNav collapsed={collapsed} />
         <Layout>
           <HeaderComponent collapsed={collapsed} setCollapsed={setCollapsed} />
-          <Content className="m-4">
+          <Content className="m-4 !overflow-auto">
             <Title level={5}>Dashboard</Title>
             <BreadcrumbComponent />
             {children}

@@ -3,6 +3,7 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import DashboardLayout from "./components/dashboardLayout.component";
+import StoreProvider from "./StoreProvider";
 
 const roboto = Roboto({
   weight: "400",
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <AntdRegistry>
-          <DashboardLayout>{children}</DashboardLayout>
-        </AntdRegistry>
+        <StoreProvider>
+          <AntdRegistry>
+            <DashboardLayout>{children}</DashboardLayout>
+          </AntdRegistry>
+        </StoreProvider>
       </body>
     </html>
   );

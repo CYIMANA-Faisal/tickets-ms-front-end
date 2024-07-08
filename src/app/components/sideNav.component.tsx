@@ -13,7 +13,7 @@ const { Sider } = Layout;
 
 interface MenuItem {
   key: string;
-  label: string;
+  label: React.ReactNode;
   icon: React.ReactNode;
   href: string;
 }
@@ -58,19 +58,16 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
     },
   ];
 
-  const renderMenuItem = (item: MenuItem) => (
-    <Menu.Item
-      key={item.key}
-      icon={item.icon}
-      className={`!text-white !text-md hover:!text-primary-hover !mb-3 ${
-        selectedKey === item.key
-          ? "!bg-primary border-l-4 border-white !rounded-none"
-          : ""
-      }`}
-    >
-      <Link href={item.href}>{item.label}</Link>
-    </Menu.Item>
-  );
+  const menuItems = items.map((item) => ({
+    key: item.key,
+    icon: item.icon,
+    label: <Link href={item.href}>{item.label}</Link>,
+    className: `!text-white !text-md hover:!text-primary-hover !mb-3 ${
+      selectedKey === item.key
+        ? "!bg-primary border-l-4 border-white !rounded-none"
+        : ""
+    }`,
+  }));
 
   return (
     <Sider
@@ -88,9 +85,8 @@ const SideNav: React.FC<SideNavProps> = ({ collapsed }) => {
         selectedKeys={[selectedKey]}
         className="!bg-primary !mt-4"
         onClick={({ key }) => handleMenuClick(key)}
-      >
-        {items.map(renderMenuItem)}
-      </Menu>
+        items={menuItems}
+      />
     </Sider>
   );
 };

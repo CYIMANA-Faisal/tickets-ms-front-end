@@ -11,6 +11,8 @@ import {
 
 const chats = [
   { id: 1, name: "Faisal", date: "2020-04-21", status: "Open" },
+  { id: 1, name: "Faisal", date: "2020-04-21", status: "Open" },
+  { id: 3, name: "Bob", date: "2020-04-23", status: "Open" },
   { id: 2, name: "Alice", date: "2020-04-22", status: "Closed" },
   { id: 3, name: "Bob", date: "2020-04-23", status: "Open" },
 ];
@@ -25,7 +27,12 @@ const Page: React.FunctionComponent = () => {
       content:
         "Hello @chanels, Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
       timestamp: "2024-05-23 08:00 PM",
-      attachments: [{ name: "file.pdf", url: "/path/to/file.pdf" }],
+      attachments: [
+        {
+          name: "https://drive.google.com/file/d/14hYIN2NZCI6JZsmF0tIXdxar1UmWpNAv/view?usp=drive_link",
+          url: "https://drive.google.com/file/d/14hYIN2NZCI6JZsmF0tIXdxar1UmWpNAv/view?usp=drive_link",
+        },
+      ],
       isVisible: true,
     },
     {
