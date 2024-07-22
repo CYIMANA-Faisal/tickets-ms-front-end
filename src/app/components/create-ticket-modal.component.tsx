@@ -5,6 +5,9 @@ import { UploadOutlined } from "@ant-design/icons";
 import NotificationComponent from "./notification.component";
 import { NotificationProps } from "../../libs/types";
 import { useCreateTicketMutation } from "../../libs/features/api/endpoints/tickets.endpoints";
+import { RcFile } from "antd/lib/upload/interface";
+import axios from 'axios';
+
 
 const { Option } = Select;
 
@@ -21,6 +24,7 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({
 }) => {
   const [form] = Form.useForm();
   const [createTicket] = useCreateTicketMutation();
+  const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const openNotificationWithIcon = ({
     type,
@@ -35,35 +39,73 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({
     });
   };
 
+  const createTicketWithAxios = async (formData: any) => {
+    try {
+      console.log( "url", `${baseURL}/tickets`)
+      const response = await axios.post(`${baseURL}/tickets`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Response:', response.data);
+      openNotificationWithIcon({
+        type: "success",
+        message: "Ticket Created",
+        description: "Your ticket has been created successfully.",
+      });
+      handleOk();
+      return response.data;
+    } catch (error) {
+      console.error('Error creating ticket:', error);
+      openNotificationWithIcon({
+        type: "error",
+        message: "Ticket Creation Failed",
+        description: "There was an error creating your ticket.",
+      });
+      throw error; 
+    }
+  };
+
   const onOk = () => {
     form
       .validateFields()
       .then((values) => {
-        const newTicketData = {
-          ...values,
-          customerID: 564,
-          company: "traversal",
-          uploads: [],
-        };
-        console.log("Form values:", newTicketData);
-        // Call the createTicket mutation function
-        createTicket(newTicketData)
-          .then(() => {
-            openNotificationWithIcon({
-              type: "success",
-              message: "Ticket Created",
-              description: "Your ticket has been created successfully.",
-            });
-            handleOk();
-          })
-          .catch((error) => {
-            console.error("Error creating ticket:", error);
-            openNotificationWithIcon({
-              type: "error",
-              message: "Ticket Creation Failed",
-              description: "There was an error creating your ticket.",
-            });
+        const formData = new FormData();
+        formData.append("subject", values.subject);
+        formData.append("description", values.description);
+        formData.append("meterNumber", values.meterNumber);
+        formData.append("customerID", "564");
+        formData.append("company", "chanels");
+
+        if (values.uploads) {
+          values.uploads.forEach((file: RcFile) => {
+            formData.append("uploads", file);
           });
+        }
+
+        // Log the FormData entries
+        for (let [key, value] of formData.entries()) {
+          console.log(`${key}: ${value}`);
+        }
+        createTicketWithAxios(formData)
+
+        // createTicket(formData)
+        //   .then(() => {
+        //     openNotificationWithIcon({
+        //       type: "success",
+        //       message: "Ticket Created",
+        //       description: "Your ticket has been created successfully.",
+        //     });
+        //     handleOk();
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error creating ticket:", error);
+        //     openNotificationWithIcon({
+        //       type: "error",
+        //       message: "Ticket Creation Failed",
+        //       description: "There was an error creating your ticket.",
+        //     });
+        //   });
       })
       .catch((info) => {
         console.log("Validate Failed:", info);
@@ -118,21 +160,25 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({
             />
           </Form.Item>
           <Form.Item
-            name="location"
-            label="Location"
-            rules={[{ required: true, message: "Please input the location!" }]}
+            name="meterNumber"
+            label="Meter Number"
+            rules={[{ required: true, message: "Please select the meter number!" }]}
           >
-            <Input className="!w-full !p-2 !border !rounded-md !border-gray-300" />
-          </Form.Item>
-          <Form.Item
-            name="severity"
-            label="Severity"
-            rules={[{ required: true, message: "Please select the severity!" }]}
-          >
-            <Select>
-              <Option value="normal">Normal</Option>
-              <Option value="high">High</Option>
-            </Select>
+            <Select
+              showSearch
+              placeholder="Search to Select"
+              optionFilterProp="label"
+              filterSort={(optionA, optionB) =>
+                (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
+              }
+              options={[
+                { value: '2344', label: 'MT-2344' },
+                { value: '4353', label: 'MT-4353' },
+                { value: '5423', label: 'MT-5423' },
+                { value: '4677', label: 'MT-4677' },
+                { value: '6578', label: 'MT-6578' },
+              ]}
+            />
           </Form.Item>
           <Form.Item
             name="uploads"
@@ -141,15 +187,15 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({
             getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
           >
             <Upload
-              // action="http://example.com/upload"
               listType="text"
               fileList={[]}
+              beforeUpload={() => false} // prevent automatic upload
               onChange={(info) => {
-                // Handle file list change if needed
+                form.setFieldsValue({ uploads: info.fileList });
               }}
               onRemove={(file) => {
-                // Handle file removal from fileList
-                // This function will be called when clicking the delete (cross) button
+                const newFileList = form.getFieldValue("uploads").filter((item: RcFile) => item.uid !== file.uid);
+                form.setFieldsValue({ uploads: newFileList });
               }}
             >
               <Button

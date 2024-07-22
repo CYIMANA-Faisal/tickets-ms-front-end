@@ -3,11 +3,17 @@ import { apiSlice } from "../apiSlice";
 export const ticketEndpoints = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createTicket: builder.mutation({
-      query: (ticket) => ({
-        url: "/tickets",
-        method: "POST",
-        body: ticket,
-      }),
+      query: (ticket) => {
+        return {
+          url: "/tickets",
+          method: "POST",
+          headers: {
+            'Content-Type': 'multipart/form-data;'
+          },
+          body: ticket,
+          formData:true
+        };
+      },
     }),
     getTickets: builder.query({
       query: () => "/tickets",
@@ -15,11 +21,11 @@ export const ticketEndpoints = apiSlice.injectEndpoints({
     getTicketById: builder.query({
       query: (id) => `/tickets/${id}`,
     }),
-    updateTicket: builder.mutation({
-      query: ({ id, ...ticket }) => ({
-        url: `/tickets/${id}`,
+    attendTicket: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/tickets/${id}/attend`,
         method: "PUT",
-        body: ticket,
+        body: data,
       }),
     }),
     deleteTicket: builder.mutation({
@@ -35,6 +41,6 @@ export const {
   useCreateTicketMutation,
   useGetTicketsQuery,
   useGetTicketByIdQuery,
-  useUpdateTicketMutation,
+  useAttendTicketMutation,
   useDeleteTicketMutation,
 } = ticketEndpoints;

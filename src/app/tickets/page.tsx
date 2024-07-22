@@ -2,6 +2,8 @@ import { Input } from "antd";
 import FilterButtonGroup from "../components/filter.component";
 import Tickets from "../components/tickets.component";
 import CreateTicketButton from "../components/create-ticket-button.component";
+import { ReloadOutlined } from "@ant-design/icons";
+import ReloadTickets from "../components/reload-tickets.components";
 
 export default function Page() {
   return (
@@ -12,10 +14,11 @@ export default function Page() {
           placeholder="Search"
           className="text-md !rounded-full !p-2 !border !border-gray-400 !w-80 !h-11 !bg-white !text-black !placeholder-gray-500 !focus:outline-none !focus:ring-2 !focus:ring-blue-500 !pl-4"
         />
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <h3 className="text-md font-bold">Show: </h3>
           <FilterButtonGroup />
-        </div>
+        </div> */}
+        <ReloadTickets />
         <div>
           <CreateTicketButton />
         </div>

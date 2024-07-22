@@ -6,7 +6,8 @@ import { useGetTicketsQuery } from "../../libs/features/api/endpoints/tickets.en
 import Ticket from "./ticket.component";
 import { ITicket } from "../../libs/types";
 import useMqtt from "../hooks/useMqtt";
-import { addTicket } from "../../libs/features/tickets/ticketsSlice"; // Adjust the import path
+import { addTicket, removeTicket } from "../../libs/features/tickets/ticketsSlice"; // Adjust the import path
+import handle from "mqtt/lib/handlers/index";
 
 const Tickets: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,9 +35,27 @@ const Tickets: React.FC = () => {
     [dispatch]
   );
 
+  const handleAttendedTicket = useCallback(
+    (message: string) => {
+      console.log("Attended ticket message:", message);
+      try {
+        const attendedTicket: ITicket = JSON.parse(message); // Adjust based on the message format
+        dispatch(removeTicket(attendedTicket.id));
+      } catch (error) {
+        console.error("Failed to parse attended ticket message", error);
+      }
+    },
+    [dispatch]
+  );
+
   useMqtt({
-    topic: "ticket-ms/traversal/new-tickets",
+    topic: "ticket-ms/chanels/new-tickets",
     onMessage: handleNewTicket,
+  });
+
+  useMqtt({
+    topic: "ticket-ms/chanels/attend-tickets",
+    onMessage: handleAttendedTicket,
   });
 
   if (isLoading) {
@@ -49,14 +68,22 @@ const Tickets: React.FC = () => {
 
   return (
     <div className="h-[80%] w-full overflow-auto mt-5">
+      <Ticket
+          key={Math.random()}
+          id={Math.random()}
+          referenceID="REFERENCE ID"
+          subject="SUBJECT"
+          meterNumber="METER NUMBER"
+          isHeader={true}
+        />
       {tickets.map((ticket: ITicket) => (
         <Ticket
           key={ticket.id}
           id={ticket.id}
           referenceID={ticket.referenceID}
           subject={ticket.subject}
-          location={ticket.location}
-          severity={ticket.severity}
+          meterNumber={ticket.meterNumber}
+          isHeader={false}
         />
       ))}
     </div>

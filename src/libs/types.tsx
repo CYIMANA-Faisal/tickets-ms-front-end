@@ -5,9 +5,8 @@ export interface ITicket {
   deletedAt: string | null;
   referenceID: string;
   subject: string;
-  location: string;
   description: string;
-  severity: string;
+  meterNumber: string;
   customerID: number;
   uploads: string[];
   supportStaffID: number;
