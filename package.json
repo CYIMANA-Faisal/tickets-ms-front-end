@@ -9,11 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.21.0",
+    "@ant-design/icons": "^5.3.7",
     "@ant-design/nextjs-registry": "^1.0.0",
+    "@react-pdf/renderer": "^3.4.4",
+    "@reduxjs/toolkit": "^2.2.6",
     "antd": "^5.18.1",
+    "axios": "^1.7.2",
+    "mqtt": "^5.7.3",
     "next": "14.2.4",
+    "paho-mqtt": "^1.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-quill": "^2.0.0",
+    "react-redux": "^9.1.2",
+    "recharts": "^2.12.7"
   },
   "devDependencies": {
     "@types/node": "^20",
